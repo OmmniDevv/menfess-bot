@@ -44,36 +44,13 @@ bot.catch((err) => {
   console.error(`[Bot] Error handling update ${err.ctx.update.update_id}:`, err.error);
 });
 
-// Deteksi mode: webhook jika WEBHOOK_URL diset dan bukan placeholder
-const isWebhookMode =
-  config.webhookUrl &&
-  config.webhookUrl !== 'https://placeholder.com' &&
-  config.webhookUrl.startsWith('https://');
-
 async function main(): Promise<void> {
   console.log('[App] Connecting to MongoDB...');
   await connectDB();
   console.log('[App] MongoDB connected.');
-
-  if (isWebhookMode) {
-    // ── WEBHOOK MODE (Render) ──────────────────────────────────────────────
-    const app = new Hono();
-
-    app.get('/ping', (c) => c.json({ status: 'ok', timestamp: new Date() }));
-    app.post('/webhook', webhookCallback(bot, 'hono'));
-
-    await bot.api.setWebhook(`${config.webhookUrl}/webhook`);
-    console.log(`[App] Webhook set to: ${config.webhookUrl}/webhook`);
-
-    serve({ fetch: app.fetch, port: config.port }, (info) => {
-      console.log(`[App] HTTP server listening on port ${info.port}`);
-    });
-  } else {
-    // ── POLLING MODE (lokal) ───────────────────────────────────────────────
     await bot.api.deleteWebhook();
     bot.start({ onStart: () => console.log('[App] Bot running in polling mode') });
   }
-}
 
 main().catch((err) => {
   console.error('[App] Fatal startup error:', err);

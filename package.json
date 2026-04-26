@@ -10,13 +10,14 @@
   },
   "dependencies": {
     "@hono/node-server": "latest",
+    "crypto": "latest",
+    "dotenv": "latest",
     "grammy": "latest",
     "hono": "latest",
-    "mongoose": "latest",
-    "dotenv": "latest"
+    "mongoose": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
+    "@types/node": "^25.6.0",
     "ts-node-dev": "latest",
     "typescript": "latest"
   }

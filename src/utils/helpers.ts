@@ -11,11 +11,21 @@ export function hashUserId(userId: number): string {
     .slice(0, 8);
 }
 
+const JAKARTA_TIMEZONE = 'Asia/Jakarta';
+
 /**
- * Check if two dates are the same calendar day
+ * Format date ke string hari berdasarkan timezone Jakarta
+ */
+function toJakartaDateString(date: Date): string {
+  return date.toLocaleDateString('en-CA', { timeZone: JAKARTA_TIMEZONE });
+  // en-CA menghasilkan format YYYY-MM-DD yang konsisten
+}
+
+/**
+ * Check if two dates are the same calendar day (Jakarta timezone)
  */
 export function isSameDay(date1: Date, date2: Date): boolean {
-  return date1.toDateString() === date2.toDateString();
+  return toJakartaDateString(date1) === toJakartaDateString(date2);
 }
 
 /**
