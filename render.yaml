@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: menfess-bot
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: GROUP_ID
+        sync: false
+      - key: TOPIC_ID
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: MAX_MEDIA_PER_DAY
+        value: "3"
+      - key: ADMIN_IDS
+        sync: false

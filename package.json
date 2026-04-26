@@ -1,0 +1,23 @@
+{
+  "name": "menfess-bot",
+  "version": "1.0.0",
+  "description": "Telegram Menfess Bot with GrammY + MongoDB",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "latest",
+    "grammy": "latest",
+    "hono": "latest",
+    "mongoose": "latest",
+    "dotenv": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "ts-node-dev": "latest",
+    "typescript": "latest"
+  }
+}
